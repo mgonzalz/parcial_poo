@@ -29,7 +29,7 @@ this Python class.
               All rights are reserved. Reproduction in whole or in part is
               prohibited without the written consent of the copyright owner.
 """
-
+from weapon_type import WeaponType
 
 # Source packages.
 
@@ -68,6 +68,27 @@ class Pokemon():
       >>> from weapon_type import WeaponType
       >>> obj_Pokemon = Pokemon(1, "Bulbasaur", WeaponType.PUNCH, 100, 7, 10)
     """
+    def __init__(self, ID, pokemon_name, weapon_type, health_points, atttack_rating, defense_rating):
+        self.ID = ID
+        self.pokemon_name = pokemon_name
+        self.weapon_type = weapon_type #Puñetazo, Patada, Codazo, Cabezazo.
+        self.health_points = health_points # 1 - 100
+        self.attack_rating = atttack_rating # 1 - 10
+        self.defense_rating = defense_rating # 1 - 10
+    def get_pokemon_name(self):
+        return self.pokemon_name
+    def get_weapon_type(self):
+        return self.weapon_type
+    def get_health_points(self):
+        return self.health_points
+    def get_attack_rating(self):
+        return self.attack_rating
+    def get_defense_rating(self):
+        return self.defense_rating
+    def __str__(self):
+        return 'Pokemon ID ' + self.ID + ' with name '+ self.pokemon_name + ' has a weapon ' + self.weapon_type + ' and health ' + self.health_points #Pokemon ID 8 with name Bulbasaur has as weapon PUNCH and health 87
+    
+
 
 
 

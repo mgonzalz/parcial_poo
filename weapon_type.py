@@ -33,9 +33,9 @@ this Python class.
 
 # Source packages.
 
+from enum import Enum #Enum es una clase de Python que permite crear enumeraciones
 
-
-class WeaponType():
+class WeaponType(Enum):
     """Python class to implement an enumeration for the attribute Weapon Type.
 
     This Python class implements an enumeration for the attribute Weapon Type.
@@ -60,6 +60,11 @@ class WeaponType():
       >>> from weapon_type import WeaponType
       >>> obj_WeaponType = WeaponType.Boxer
     """
+    PUNCH = 2
+    KICK = 4
+    ELBOW = 6
+    HEADBUTT = 10 #TEST 1 SUPERADO Y TEST 2
+
 
 
 
@@ -132,7 +137,6 @@ def main():
         print("Test PASS. The enum for Head Butt has been correctly set.")
     else:
         print("Test FAIL. Check the method __init__().")
-
 
 # Checking whether this module is executed just itself alone.
 if __name__ == "__main__":
