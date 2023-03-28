@@ -86,7 +86,8 @@ class Pokemon():
     def get_defense_rating(self):
         return self.defense_rating
     def __str__(self):
-        return 'Pokemon ID ' + self.ID + ' with name '+ self.pokemon_name + ' has a weapon ' + self.weapon_type + ' and health ' + self.health_points #Pokemon ID 8 with name Bulbasaur has as weapon PUNCH and health 87
+        cadena = 'Pokemon ID ' + str(self.ID) + ' with name '+ str(self.pokemon_name) + ' has a weapon ' + str(self.weapon_type) + ' and health ' + str(self.health_points) #Pokemon ID 8 with name Bulbasaur has as weapon PUNCH and health 87
+        return cadena
     
 
 
@@ -118,7 +119,7 @@ def main():
     """
 
     print("=================================================================.")
-    print("Test Case 1: Create a Pokemon.")
+    print("Test Case 1: Create a Pokemon.")                                         #TEST 1 SUPERADO
     print("=================================================================.")
     pokemon_1 = Pokemon(1, "Ivysaur", WeaponType.HEADBUTT, 100, 8, 9)
 
