@@ -68,10 +68,10 @@ class Pokemon():
     def __init__(self, ID, pokemon_name, weapon_type, health_points, atttack_rating, defense_rating):
         self.ID = int(ID)
         self.pokemon_name = str(pokemon_name)
-        self.weapon_type = weapon_type #Puñetazo, Patada, Codazo, Cabezazo.
-        self.health_points = health_points # 1 - 100
-        self.attack_rating = atttack_rating # 1 - 10
-        self.defense_rating = defense_rating # 1 - 10
+        self.weapon_type = weapon_type #Puñetazo, Patada, Codazo, Cabezazo. CLASE WEAPON_TYPE
+        self.health_points = int(health_points) # 1 - 100
+        self.attack_rating = int(atttack_rating) # 1 - 10
+        self.defense_rating = int(defense_rating) # 1 - 10
     # METODOS GETTERS Y SETTERS
     def get_pokemon_name(self): # Los metodos getters permiten acceder a los atributos de una clase de forma controlada. ACCEDER SIN MODIFICAR.
         return self.pokemon_name
@@ -102,17 +102,14 @@ class Pokemon():
 
     # METODO FIGHT_DEFENSE
     def fight_defense(self, damage):
-        self.health_points -= damage
+        self.health_points = self.health_points - damage + self.defense_rating
         if self.health_points <= 0:
             return False
         else:
             return True
     def fight_attack(self, pokemon_to_attack):
-        damage = self.attack_rating - pokemon_to_attack.fight_defense(self.attack_rating)
-        if damage > 0:
-            return True
-        else:
-            return False
+        damage -= pokemon_to_attack.fight_defense(self.attack_rating)
+        pokemon_to_attack.set_health_points(damage)
 
 
 
@@ -194,7 +191,7 @@ def main():
 
 
     print("=================================================================.")
-    print("Test Case 3: Pokemon alive?¿?.")                     #TEST 3 SUPERADO
+    print("Test Case 3: Pokemon alive?¿?.")                             #TEST 3 SUPERADO
     print("=================================================================.")
     pokemon_3 = Pokemon(3, "Wartortle", WeaponType.KICK, 97, 8, 9)
 
@@ -211,7 +208,7 @@ def main():
 
 
     print("=================================================================.")
-    print("Test Case 4: Check the defense during a Fight.")
+    print("Test Case 4: Check the defense during a Fight.")              #TEST 4 SUPERADO
     print("=================================================================.")
     pokemon_4 = Pokemon(4, "Squirtle", WeaponType.ELBOW, 93, 9, 6)
 
@@ -222,7 +219,7 @@ def main():
     else:
         print("Test FAIL. Check the method fight_defense().")
 
-'''
+
     print("=================================================================.")
     print("Test Case 5: Check the attack during a Fight.")
     print("=================================================================.")
@@ -241,7 +238,6 @@ def main():
             print("Test PASS. The method fight_attack() has been implemented correctly.")
         else:
             print("Test FAIL. Check the method fight_attack().")
-'''
 
 
 
