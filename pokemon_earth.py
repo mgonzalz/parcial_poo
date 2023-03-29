@@ -36,42 +36,14 @@ from weapon_type import WeaponType
 
 from pokemon import Pokemon
 class PokemonEarth(Pokemon):
-    """Python class to implement a basic version of a Pokemon of the game.
-
-    This Python class implements the basic version of a Pokemon of the game.
-
-    Syntax
-    ------
-      obj = PokemonEarth(id, pokemon_name, weapon_type, health_points,
-                         attack_rating, defense_rating)
-
-    Parameters
-    ----------
-      [in] id ID of the Pokemon.
-      [in] pokemon_name Name of the Pokemon.
-      [in] weapon_type Type of weapon that carries out the Pokemon.
-      [in] health_points Points of health that the Pokemon has.
-      [in] attack_rating Attack rating of the Pokemon.
-      [in] defense_rating Defense rating of the Pokemon.
-
-    Returns
-    -------
-      obj Python object output parameter that represents an instance
-          of the class Pokemon.
-
-    Attributes
-    ----------
-
-    Example
-    -------
-      >>> from pokemon import Pokemon
-      >>> from weapon_type import WeaponType
-      >>> obj_Pokemon = PokemonEarth(1, "Diglett", WeaponType.PUNCH, 100, 7, 10)
-    """
     def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
         super().__init__(ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
-        self.attack_rating = max(11, attack_rating, 20) #El ataque de un pokemon de tipo tierra no puede ser menor de 11 ni mayor de 20
-        
+        if 11<= defense_rating <= 20: #EL INDICE DE DEFENSA DEBE SER MAYOR IGUAL QUE 11 Y MENOR IGUAL QUE 20
+            self.defense_rating = defense_rating
+        else:
+            return False
+    def fight_attack(self, pokemon_to_attack):
+        self.health_points -= pokemon_to_attack.attack_rating
 
 def main():
     """Function main of the module.
@@ -170,7 +142,7 @@ def main():
     print("=================================================================.")
     print("Test Case 5: Check the attack during a Fight.")
     print("=================================================================.")
-    pokemon_5 = PokemonEarth(5, "Diglett", WeaponType.PUNCH, 99, 10, 20)
+    pokemon_5 = PokemonEarth(5, "Diglett", WeaponType.PUNCH, 99, 10, 20) #Pokemon(ID, nombre, tipo, vida, ataque, defensa)
     pokemon_6 = PokemonEarth(6, "Diglett", WeaponType.PUNCH, 99, 9, 18)
 
     pokemon_was_hit = pokemon_5.fight_attack(pokemon_6)
