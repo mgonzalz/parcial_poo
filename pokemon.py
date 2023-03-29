@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-
 """
 This Python module contains not only the class Pokemon, but also the test of
 this Python class.
@@ -68,14 +66,14 @@ class Pokemon():
     """
     # ATRIBUTOS
     def __init__(self, ID, pokemon_name, weapon_type, health_points, atttack_rating, defense_rating):
-        self.ID = ID
-        self.pokemon_name = int(pokemon_name)
+        self.ID = int(ID)
+        self.pokemon_name = str(pokemon_name)
         self.weapon_type = weapon_type #Puñetazo, Patada, Codazo, Cabezazo.
         self.health_points = health_points # 1 - 100
         self.attack_rating = atttack_rating # 1 - 10
         self.defense_rating = defense_rating # 1 - 10
     # METODOS GETTERS Y SETTERS
-    def get_pokemon_name(self):
+    def get_pokemon_name(self): # Los metodos getters permiten acceder a los atributos de una clase de forma controlada. ACCEDER SIN MODIFICAR.
         return self.pokemon_name
     def get_weapon_type(self):
         return self.weapon_type
@@ -85,7 +83,7 @@ class Pokemon():
         return self.attack_rating
     def get_defense_rating(self):
         return self.defense_rating
-    def set_pokemon_name(self, pokemon_name):
+    def set_pokemon_name(self, pokemon_name): #Los metodos setters permiten modificar los atributos de una clase de forma controlada. MODIFICAR DESDE FUERA DE LA CLASE
         self.pokemon_name = pokemon_name
     def set_weapon_type(self, weapon_type):
         self.weapon_type = weapon_type
@@ -101,17 +99,27 @@ class Pokemon():
             return True
         else:
             return False
-    
+
     # METODO FIGHT_DEFENSE
-    
+    def fight_defense(self, damage):
+        self.health_points -= damage
+        if self.health_points <= 0:
+            return False
+        else:
+            return True
+    def fight_attack(self, pokemon_to_attack):
+        damage = self.attack_rating - pokemon_to_attack.fight_defense(self.attack_rating)
+        if damage > 0:
+            return True
+        else:
+            return False
+
+
 
     # METODO STR
     def __str__(self):  #Pokemon ID 2 with name Charmander has as weapon HEADBUTT and health 100
         concat = f'Pokemon ID {self.ID} with name {self.pokemon_name} has a {self.weapon_type.name} and health {self.health_points}'
         return concat
-
-
-
 
 
 
@@ -169,8 +177,11 @@ def main():
         print("Test FAIL. Check the method __init__().")
     
 
+
+
+
     print("=================================================================.")
-    print("Test Case 2: Human-readable format of the object.")              #MIRAR TEST 2, FUNCION PERO NO PASA EL TEST
+    print("Test Case 2: Human-readable format of the object.")          #MIRAR TEST 2, FUNCION PERO NO PASA EL TEST
     print("=================================================================.")
     pokemon_2 = Pokemon(2, "Charmander", WeaponType.HEADBUTT, 100, 7, 10)
     
@@ -179,8 +190,11 @@ def main():
     else:
         print("Test FAIL. Check the method __str__()." + " RESULT: " + str(pokemon_2))
 
+
+
+
     print("=================================================================.")
-    print("Test Case 3: Pokemon alive?¿?.")
+    print("Test Case 3: Pokemon alive?¿?.")                     #TEST 3 SUPERADO
     print("=================================================================.")
     pokemon_3 = Pokemon(3, "Wartortle", WeaponType.KICK, 97, 8, 9)
 
@@ -194,7 +208,8 @@ def main():
     else:
         print("Test FAIL. Check the method is_alive().")
 
-'''
+
+
     print("=================================================================.")
     print("Test Case 4: Check the defense during a Fight.")
     print("=================================================================.")
@@ -207,7 +222,7 @@ def main():
     else:
         print("Test FAIL. Check the method fight_defense().")
 
-
+'''
     print("=================================================================.")
     print("Test Case 5: Check the attack during a Fight.")
     print("=================================================================.")
