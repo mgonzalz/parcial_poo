@@ -108,9 +108,11 @@ class Pokemon():
         else:
             return True
     def fight_attack(self, pokemon_to_attack):
-        damage -= pokemon_to_attack.fight_defense(self.attack_rating)
-        pokemon_to_attack.set_health_points(damage)
-
+        self.health_points -= pokemon_to_attack.fight_defense(self.attack_rating)
+        if self.health_points <= 0:
+            return False
+        else:
+            return True
 
 
     # METODO STR
@@ -221,7 +223,7 @@ def main():
 
 
     print("=================================================================.")
-    print("Test Case 5: Check the attack during a Fight.")
+    print("Test Case 5: Check the attack during a Fight.")               #TEST 5 SUPERADO
     print("=================================================================.")
     pokemon_5 = Pokemon(5, "Venusaur", WeaponType.PUNCH, 99, 10, 7)
     pokemon_6 = Pokemon(6, "Charmeleon", WeaponType.PUNCH, 99, 9, 8)
