@@ -115,8 +115,8 @@ class Pokemon():
 
     # METODO STR
     def __str__(self):  #Pokemon ID 2 with name Charmander has as weapon HEADBUTT and health 100
-        concat = f'Pokemon ID {self.ID} with name {self.pokemon_name} has a weapon {self.weapon_type.name} and health {self.health_points}'
-        return str(concat)
+        return "Pokemon ID " + str(self.ID) + " with name " + self.pokemon_name + " has as weapon " + self.weapon_type.name + " and health " + str(self.health_points)
+
 
 
 
@@ -178,7 +178,7 @@ def main():
 
 
     print("=================================================================.")
-    print("Test Case 2: Human-readable format of the object.")          #MIRAR TEST 2, FUNCION PERO NO PASA EL TEST
+    print("Test Case 2: Human-readable format of the object.")          #TEST 2 SUPERADO
     print("=================================================================.")
     pokemon_2 = Pokemon(2, "Charmander", WeaponType.HEADBUTT, 100, 7, 10)
     
