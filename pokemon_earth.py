@@ -70,6 +70,7 @@ class PokemonEarth(Pokemon):
     """
     def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
         super().__init__(ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
+        self.attack_rating = max(11, attack_rating, 20) #El ataque de un pokemon de tipo tierra no puede ser menor de 11 ni mayor de 20
         
 
 def main():
@@ -125,7 +126,7 @@ def main():
     else:
         print("Test FAIL. Check the method __init__().")
 
-'''
+
     print("=================================================================.")
     print("Test Case 2: Human-readable format of the object.")
     print("=================================================================.")
@@ -185,7 +186,7 @@ def main():
         else:
             print("Test FAIL. Check the method fight_attack().")
 
-'''
+
 
 # Checking whether this module is executed just itself alone.
 if __name__ == "__main__":
