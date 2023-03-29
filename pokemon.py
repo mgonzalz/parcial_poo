@@ -33,13 +33,9 @@ from weapon_type import WeaponType
 
 class Pokemon():
     """Python class to implement a basic version of a Pokemon of the game.
-
-    This Python class implements the basic version of a Pokemon of the game.
-
     Syntax
     ------
-      obj = Pokemon(id, pokemon_name, weapon_type, health_points,
-                   attack_rating, defense_rating)
+      obj = Pokemon(id, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
 
     Parameters
     ----------
@@ -107,6 +103,9 @@ class Pokemon():
             return False
         else:
             return True
+
+
+    # METODO FIGHT_ATTACK
     def fight_attack(self, pokemon_to_attack):
         self.health_points -= pokemon_to_attack.fight_defense(self.attack_rating)
         if self.health_points <= 0:
@@ -117,8 +116,8 @@ class Pokemon():
 
     # METODO STR
     def __str__(self):  #Pokemon ID 2 with name Charmander has as weapon HEADBUTT and health 100
-        concat = f'Pokemon ID {self.ID} with name {self.pokemon_name} has a {self.weapon_type.name} and health {self.health_points}'
-        return concat
+        concat = f'Pokemon ID {self.ID} with name {self.pokemon_name} has a weapon {self.weapon_type.name} and health {self.health_points}'
+        return str(concat)
 
 
 

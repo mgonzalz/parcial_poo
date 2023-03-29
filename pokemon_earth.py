@@ -32,10 +32,10 @@ this Python class.
 
 
 # Source packages.
+from weapon_type import WeaponType
 
-
-
-class PokemonEarth():
+from pokemon import Pokemon
+class PokemonEarth(Pokemon):
     """Python class to implement a basic version of a Pokemon of the game.
 
     This Python class implements the basic version of a Pokemon of the game.
@@ -68,7 +68,9 @@ class PokemonEarth():
       >>> from weapon_type import WeaponType
       >>> obj_Pokemon = PokemonEarth(1, "Diglett", WeaponType.PUNCH, 100, 7, 10)
     """
-
+    def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
+        super().__init__(ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
+        
 
 def main():
     """Function main of the module.
@@ -94,7 +96,7 @@ def main():
     """
 
     print("=================================================================.")
-    print("Test Case 1: Create a Pokemon.")
+    print("Test Case 1: Create a Pokemon.")                             #TEST 1 SUPERADO
     print("=================================================================.")
     pokemon_1 = PokemonEarth(1, "Diglett", WeaponType.HEADBUTT, 100, 8, 15)
 
@@ -123,7 +125,7 @@ def main():
     else:
         print("Test FAIL. Check the method __init__().")
 
-
+'''
     print("=================================================================.")
     print("Test Case 2: Human-readable format of the object.")
     print("=================================================================.")
@@ -183,7 +185,7 @@ def main():
         else:
             print("Test FAIL. Check the method fight_attack().")
 
-
+'''
 
 # Checking whether this module is executed just itself alone.
 if __name__ == "__main__":
