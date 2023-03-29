@@ -10,7 +10,7 @@ class PokemonEarth(Pokemon):
         else:
             return False
     def fight_attack(self, pokemon_to_attack):
-        self.health_points -= pokemon_to_attack.attack_rating
+        super().fight_attack(pokemon_to_attack)
 
 def main():
     print("=================================================================.")

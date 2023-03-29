@@ -107,12 +107,11 @@ class Pokemon():
 
     # METODO FIGHT_ATTACK
     def fight_attack(self, pokemon_to_attack):
-        self.health_points -= pokemon_to_attack.fight_defense(self.attack_rating)
+        self.health_points -= pokemon_to_attack.attack_rating
         if self.health_points <= 0:
             return False
         else:
             return True
-
 
     # METODO STR
     def __str__(self):  #Pokemon ID 2 with name Charmander has as weapon HEADBUTT and health 100

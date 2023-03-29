@@ -8,7 +8,8 @@ class PokemonWater(Pokemon):
             self.attack_rating = attack_rating
         else:
             return False
-            
+    def fight_attack(self, pokemon_to_attack):
+        self.health_points -= pokemon_to_attack.attack_rating
 
 
 def main():
@@ -112,7 +113,6 @@ def main():
     pokemon_6 = PokemonWater(6, "Squirtle", WeaponType.PUNCH, 99, 18, 9)
 
     pokemon_was_hit = pokemon_5.fight_attack(pokemon_6)
-
     if pokemon_was_hit:
         if pokemon_6.get_health_points() == 88:
             print("Test PASS. The method fight_attack() has been implemented correctly.")

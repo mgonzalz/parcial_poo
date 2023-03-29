@@ -1,97 +1,35 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
-"""
-This Python module contains not only the class Pokemon, but also the test of
-this Python class.
-
-@contents :  This module contains not only a single Python class, but also the
-             test cases to probe its functionality.
-@project :  N/A
-@program :  N/A
-@file :  pokemon.py
-@author :  Antonio Artes Garcia (antonio.artesgarcia@ceu.es)
-           Francisco Hernando Gallego (francisco.hernandogallego@ceu.es)
-           Ruben Juarez Cadiz (ruben.juarezcadiz@ceu.es)
-
-@version :  0.0.1, 08 November 2021
-@information :  The Zen of Python
-                  https://www.python.org/dev/peps/pep-0020/
-                Style Guide for Python Code
-                  https://www.python.org/dev/peps/pep-0008/
-                Example NumPy Style Python Docstrings
-                  http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
-                doctest – Testing through documentation
-                  https://pymotw.com/2/doctest/
-
-@copyright :  Copyright 2021 GNU AFFERO GENERAL PUBLIC.
-              All rights are reserved. Reproduction in whole or in part is
-              prohibited without the written consent of the copyright owner.
-"""
 
 
 # Source packages.
 
+from weapon_type import WeaponType
+from pokemon import Pokemon
+import random
+class PokemonAir(Pokemon):
+    def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
+        super().__init__(ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
+    def is_alive(self):
+        if self.health_points > 0:
+            return True
+        else:
+            return False
 
+    def fight_attack(self, pokemon_to_attack):
+        super().fight_attack(pokemon_to_attack)
 
-class PokemonAir():
-    """Python class to implement a basic version of a Pokemon of the game.
-
-    This Python class implements the basic version of a Pokemon of the game.
-
-    Syntax
-    ------
-      obj = PokemonAir(id, pokemon_name, weapon_type, health_points,
-                         attack_rating, defense_rating)
-
-    Parameters
-    ----------
-      [in] id ID of the Pokemon.
-      [in] pokemon_name Name of the Pokemon.
-      [in] weapon_type Type of weapon that carries out the Pokemon.
-      [in] health_points Points of health that the Pokemon has.
-      [in] attack_rating Attack rating of the Pokemon.
-      [in] defense_rating Defense rating of the Pokemon.
-
-    Returns
-    -------
-      obj Python object output parameter that represents an instance
-          of the class Pokemon.
-
-    Attributes
-    ----------
-
-    Example
-    -------
-      >>> from pokemon import Pokemon
-      >>> from weapon_type import WeaponType
-      >>> obj_Pokemon = PokemonEarth(1, "Pidgey", WeaponType.PUNCH, 100, 7, 10)
-    """
-
-
+    # METODO FIGHT_DEFENSE
+    def fight_defense(self, damage):
+        
+        if self.health_points <= 0:
+                return False
+        else:
+            if 0 <= random.randint(0, 100) <= 50:
+                self.health_points = self.health_points - damage + self.defense_rating
+                return True
+            else:
+                self.health_points = self.health_points
+                return 'The attack was avoided'
 def main():
-    """Function main of the module.
-
-    The function main of this module is used to test the Class that is described
-    in this module.
-
-    Syntax
-    ------
-      [ ] = main()
-
-    Parameters
-    ----------
-      Null .
-
-    Returns
-    -------
-      Null .
-
-    Example
-    -------
-      >>> main()
-    """
 
     print("=================================================================.")
     print("Test Case 1: Create a Pokemon.")
@@ -153,7 +91,7 @@ def main():
                 print("Test PASS. The method is_alive() has been implemented correctly.")
             else:
                 print("Test FAIL. Check the method is_alive().")
-            
+
     else:
         print("Test FAIL. Check the method is_alive().")
 
@@ -184,7 +122,6 @@ def main():
     pokemon_6 = PokemonAir(6, "Pidgey", WeaponType.PUNCH, 99, 9, 6)
 
     pokemon_was_hit = pokemon_5.fight_attack(pokemon_6)
-
     if pokemon_was_hit:
         if pokemon_6.get_health_points() == 95:
             print("Test PASS. The method fight_attack() has been implemented correctly.")
