@@ -107,7 +107,7 @@ class Pokemon():
 
     # METODO FIGHT_ATTACK
     def fight_attack(self, pokemon_to_attack):
-        self.health_points -= pokemon_to_attack.attack_rating
+        self.health_points -= pokemon_to_attack.fight_defense(self.attack_rating)
         if self.health_points <= 0:
             return False
         else:
@@ -167,7 +167,6 @@ def main():
         print("Test PASS. The parameter attack_rating has been correctly set.")
     else:
         print("Test FAIL. Check the method __init__().")
-
     if pokemon_1.get_defense_rating() == 9:
         print("Test PASS. The parameter defense_rating has been correctly set.")
     else:
@@ -178,7 +177,7 @@ def main():
 
 
     print("=================================================================.")
-    print("Test Case 2: Human-readable format of the object.")          #TEST 2 SUPERADO
+    print("Test Case 2: Human-readable format of the object.")          #TEST 2, FUNCION PERO NO PASA EL TEST
     print("=================================================================.")
     pokemon_2 = Pokemon(2, "Charmander", WeaponType.HEADBUTT, 100, 7, 10)
     

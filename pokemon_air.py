@@ -15,11 +15,10 @@ class PokemonAir(Pokemon):
             return False
 
     def fight_attack(self, pokemon_to_attack):
-        super().fight_attack(pokemon_to_attack)
+        self.health_points -= pokemon_to_attack.attack_rating
 
     # METODO FIGHT_DEFENSE
     def fight_defense(self, damage):
-        
         if self.health_points <= 0:
                 return False
         else:
@@ -28,7 +27,7 @@ class PokemonAir(Pokemon):
                 return True
             else:
                 self.health_points = self.health_points
-                return 'The attack was avoided'
+                return False
 def main():
 
     print("=================================================================.")

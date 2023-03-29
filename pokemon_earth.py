@@ -1,3 +1,4 @@
+
 # Source packages.
 from weapon_type import WeaponType
 
@@ -10,7 +11,7 @@ class PokemonEarth(Pokemon):
         else:
             return False
     def fight_attack(self, pokemon_to_attack):
-        super().fight_attack(pokemon_to_attack)
+        self.health_points -= pokemon_to_attack.attack_rating
 
 def main():
     print("=================================================================.")
