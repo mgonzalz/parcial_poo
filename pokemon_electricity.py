@@ -8,12 +8,21 @@ class PokemonElectricity(Pokemon):
     def __init__(self, ID, pokemon_name, weapon_type, health_points, atttack_rating, defense_rating):
         super().__init__(ID, pokemon_name, weapon_type, health_points, atttack_rating, defense_rating)
     def fight_attack(self, pokemon_to_attack):
-        if 0 <= random.randint(0, 100) <= 50:
-            self.health_points -= pokemon_to_attack.attack_rating
+        if self.health_points <= 0:
+            return False
         else:
-            self.health_points = 2*(self.health_points - pokemon_to_attack.attack_rating)
-    def is_alive(self):
-        super().is_alive()
+            if 0 <= random.randint(0, 100) <= 50:
+                self.health_points -= pokemon_to_attack.attack_rating
+            else:
+                self.health_points = 2*(self.health_points - pokemon_to_attack.attack_rating)
+    def fight_defense(self, damage):
+        if self.health_points <= 0:
+            return False
+        else:
+            self.health_points = self.health_points - damage + self.defense_rating
+            return True
+
+
 
 
 
@@ -61,7 +70,7 @@ def main():
 
 
     print("=================================================================.")
-    print("Test Case 3: Pokemon alive?¿?.")                                  #TEST 3 MIRAR, NO SUPERADO
+    print("Test Case 3: Pokemon alive?¿?.")                                  #TEST 3 SUPERADO
     print("=================================================================.")
     pokemon_3 = PokemonElectricity(3, "Pikachu", WeaponType.KICK, 97, 8, 7)
 
