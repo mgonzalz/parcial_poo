@@ -1,41 +1,12 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
-"""
-This Python method contains the application of the Game.
-
-@contents :  This module contains the complete implementation of the application
-             of the Game.
-@project :  N/A
-@program :  N/A
-@file :  main.py
-@author :  Antonio Artes Garcia (antonio.artesgarcia@ceu.es)
-           Francisco Hernando Gallego (francisco.hernandogallego@ceu.es)
-           Ruben Juarez Cadiz (ruben.juarezcadiz@ceu.es)
-
-@version :  0.0.1, 08 November 2021
-@information :  The Zen of Python
-                  https://www.python.org/dev/peps/pep-0020/
-                Style Guide for Python Code
-                  https://www.python.org/dev/peps/pep-0008/
-                Example NumPy Style Python Docstrings
-                  http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
-                doctest – Testing through documentation
-                  https://pymotw.com/2/doctest/
-
-@copyright :  Copyright 2021 GNU AFFERO GENERAL PUBLIC.
-              All rights are reserved. Reproduction in whole or in part is
-              prohibited without the written consent of the copyright owner.
-"""
-
-
+import csv
+from pokemon import Pokemon
 # Source packages.
 
 
 
 def get_data_from_user(name_file):
-    """Function to obtain data from each user.
+    """
+    Function to obtain data from each user.
 
     This function obtains data from each user in order to set the configuration
     of the Game.
@@ -56,6 +27,13 @@ def get_data_from_user(name_file):
     -------
       >>> list_pokemons = get_data_from_user("file.csv")
     """
+    lista = []
+    with open(name_file, newline='') as File:  
+        reader = csv.reader(File)
+        for row in reader: # CONVERTIR EN CLASES
+            pokemons = Pokemon(int(row[0]), str(row[1]), row[2], int(row[3]), int(row[4]), int(row[5]))
+            lista.append(pokemons)
+    return lista
 
 
 
@@ -84,6 +62,14 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
+    primer_pokemon = list_of_pokemons[0]
+    segundo_pokemon = list_of_pokemons[1]
+    tercer_pokemon = list_of_pokemons[2]
+    for i in range(3):
+        print("Pokemon", i+1, ":", list_of_pokemons[i].get_pokemon_name(), "with", list_of_pokemons[i].get_health_points(), "health points")
+    return list_of_pokemons, primer_pokemon, segundo_pokemon, tercer_pokemon
+
+
 
 
 
@@ -112,6 +98,7 @@ def coach_is_undefeated(list_of_pokemons):
     """
 
 
+
 def main():
     """Function main of the module.
 
@@ -138,23 +125,36 @@ def main():
     print("Let's start to set the configuration of each game user. \n")
 
     # Get configuration for Game User 1.
-
+    user1 = input("Please, introduce the name of the Game User 1: ")
+    list_pokemons_user1 = get_data_from_user("coach_1_pokemons.csv")
+    get_pokemon_in_a_list_of_pokemons(user1, list_pokemons_user1)
 
     # Get configuration for Game User 2.
-
+    user2 = input("Please, introduce the name of the Game User 2: ")
+    list_pokemons_user2 = get_data_from_user("coach_2_pokemons.csv")
+    get_pokemon_in_a_list_of_pokemons(user2, list_pokemons_user2)
 
     print("------------------------------------------------------------------")
     print("The Game starts...")
     print("------------------------------------------------------------------")
 
     # Get a copy of the list of pokemons:
-
-
+    list_pokemons_user1_copy = list_pokemons_user1.copy()
+    list_pokemons_user2_copy = list_pokemons_user2.copy()
     # Choose first pokemons
- 
+    for i in range(3):
+        choice = input("Player 1, choose your first pokemon: ")
+        if choice == list_pokemons_user1_copy[i].get_pokemon_name():
+            pokemon_user_1 = list_pokemons_user1_copy[i]
+            break
+        else:
+            print("You have not chosen a valid pokemon")
+    print("You have chosen", pokemon_user_1.get_pokemon_name())
+
 
     # Main loop.
-
+    print("------------------------------------------------------------------")
+    print("Fight!")
 
 
     print("------------------------------------------------------------------")
@@ -174,7 +174,7 @@ def main():
 
 # Checking whether this module is executed just itself alone.
 if __name__ == "__main__":
-    main()
+    main() #HAY QUE PONER MAIN() CUANDO ESTE HECHO
 
 
 # EOF
