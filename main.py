@@ -96,8 +96,20 @@ def coach_is_undefeated(list_of_pokemons):
     -------
        >>> coach_is_undefeated(list_of_pokemons)
     """
+    for i in range(len(list_of_pokemons)):
+        if list_of_pokemons[i].is_alive():
+            return True
+    return False
 
-
+def coach(list_pokemons):
+   for i in range(len(list_pokemons)):
+          choice = input("Player 1, choose your pokemon: ")
+          if choice == list_pokemons[i].get_pokemon_name():
+            pokemon_user_1 = list_pokemons[i]
+            break
+          else:
+            print("You have not chosen a valid pokemon")
+          return pokemon_user_1
 
 def main():
     """Function main of the module.
@@ -141,21 +153,25 @@ def main():
     # Get a copy of the list of pokemons:
     list_pokemons_user1_copy = list_pokemons_user1.copy()
     list_pokemons_user2_copy = list_pokemons_user2.copy()
-    # Choose first pokemons
-    for i in range(3):
-        choice = input("Player 1, choose your first pokemon: ")
-        if choice == list_pokemons_user1_copy[i].get_pokemon_name():
-            pokemon_user_1 = list_pokemons_user1_copy[i]
-            break
-        else:
-            print("You have not chosen a valid pokemon")
-    print("You have chosen", pokemon_user_1.get_pokemon_name())
 
+    # Choose first pokemons
+    pokemon_user_1 = coach(list_pokemons_user1_copy)
+    pokemon_user_2 = coach(list_pokemons_user2_copy)
 
     # Main loop.
-    print("------------------------------------------------------------------")
-    print("Fight!")
-
+    while not coach_is_undefeated(list_pokemons_user1_copy) and not coach_is_undefeated(list_pokemons_user2_copy):
+      pokemon_user_1.attack_rating(pokemon_user_2)
+      pokemon_user_2.attack_rating(pokemon_user_1)
+      if pokemon_user_1.is_alive ==False:
+        list_pokemons_user1_copy.remove(pokemon_user_1)
+        user1 = coach(list_pokemons_user1_copy)
+      if pokemon_user_2.is_alive ==False:
+        list_pokemons_user2_copy.remove(pokemon_user_2)
+        user2 = coach(list_pokemons_user2_copy)
+      if not coach_is_undefeated(list_pokemons_user1_copy):
+        print("The winner is", user2)
+      if not coach_is_undefeated(list_pokemons_user2_copy):
+        print("The winner is", user1)
 
     print("------------------------------------------------------------------")
     print("The Game has end...")
@@ -167,14 +183,13 @@ def main():
     print("------------------------------------------------------------------")
     print("Game User 1:")
 
-
     print("Game User 2:")
 
 
 
 # Checking whether this module is executed just itself alone.
 if __name__ == "__main__":
-    main() #HAY QUE PONER MAIN() CUANDO ESTE HECHO
+    main()
 
 
 # EOF
