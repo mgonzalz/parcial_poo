@@ -112,6 +112,8 @@ class Pokemon():
             return False
         else:
             return True
+    def __del__(self):
+        print("Pokemon " + self.pokemon_name + " has been destroyed.")
 
     # METODO STR
     def __str__(self):  #Pokemon ID 2 with name Charmander has as weapon HEADBUTT and health 100

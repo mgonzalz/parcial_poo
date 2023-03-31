@@ -28,7 +28,7 @@ def get_data_from_user(name_file):
       >>> list_pokemons = get_data_from_user("file.csv")
     """
     lista = []
-    with open(name_file, newline='') as File:  
+    with open(name_file, newline='') as File:
         reader = csv.reader(File)
         for row in reader: # CONVERTIR EN CLASES
             pokemons = Pokemon(int(row[0]), str(row[1]), row[2], int(row[3]), int(row[4]), int(row[5]))
