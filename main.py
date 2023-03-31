@@ -101,15 +101,15 @@ def coach_is_undefeated(list_of_pokemons):
             return True
     return False
 
-def coach(list_pokemons):
+def coach(list_pokemons, user):
    for i in range(len(list_pokemons)):
-          choice = input("Player 1, choose your pokemon: ")
+          choice = input("Player "+  user + " choose your pokemon: ")
           if choice == list_pokemons[i].get_pokemon_name():
-            pokemon_user_1 = list_pokemons[i]
+            pokemon_user = list_pokemons[i]
             break
           else:
             print("You have not chosen a valid pokemon")
-          return pokemon_user_1
+          return pokemon_user
 
 def main():
     """Function main of the module.
@@ -155,19 +155,19 @@ def main():
     list_pokemons_user2_copy = list_pokemons_user2.copy()
 
     # Choose first pokemons
-    pokemon_user_1 = coach(list_pokemons_user1_copy)
-    pokemon_user_2 = coach(list_pokemons_user2_copy)
+    pokemon_user_1 = coach(list_pokemons_user1_copy, user1)
+    pokemon_user_2 = coach(list_pokemons_user2_copy, user2)
 
     # Main loop.
     while not coach_is_undefeated(list_pokemons_user1_copy) and not coach_is_undefeated(list_pokemons_user2_copy):
       pokemon_user_1.attack_rating(pokemon_user_2)
       pokemon_user_2.attack_rating(pokemon_user_1)
-      if pokemon_user_1.is_alive ==False:
+      if pokemon_user_1.is_alive == False:
         list_pokemons_user1_copy.remove(pokemon_user_1)
-        user1 = coach(list_pokemons_user1_copy)
+        user1 = coach(list_pokemons_user1_copy, user1)
       if pokemon_user_2.is_alive ==False:
         list_pokemons_user2_copy.remove(pokemon_user_2)
-        user2 = coach(list_pokemons_user2_copy)
+        user2 = coach(list_pokemons_user2_copy, user2)
       if not coach_is_undefeated(list_pokemons_user1_copy):
         print("The winner is", user2)
       if not coach_is_undefeated(list_pokemons_user2_copy):
@@ -182,9 +182,13 @@ def main():
     print("Statistics")
     print("------------------------------------------------------------------")
     print("Game User 1:")
+    for i in range(len(list_pokemons_user1)):
+        print("Pokemon", i+1, ":", list_pokemons_user1[i].get_pokemon_name(), "with", list_pokemons_user1[i].get_health_points(), "health points")
+
 
     print("Game User 2:")
-
+    for i in range(len(list_pokemons_user2)):
+        print("Pokemon", i+1, ":", list_pokemons_user2[i].get_pokemon_name(), "with", list_pokemons_user2[i].get_health_points(), "health points")
 
 
 # Checking whether this module is executed just itself alone.
