@@ -8,13 +8,17 @@ Usuario de Github: https://github.com/mgonzalz/parcial_poo (@mgonzalz)
 ## Repositorio:
 
 En el repositorio se incluye:
-1. __pycache__ : Carpeta generada, almacena los archivos compilados en formato de bytes de código.
+1. pycache : Carpeta generada, almacena los archivos compilados en formato de bytes de código.
 2. DIAGRAMAS: Carpeta que contiente el diagrama UML junto al flowchart. Disponible en: .png; .drawio
 3. Archivos csv: Se encuentran dos, en cada uno de ellos hay tres tipos de Pokemon junto a su ID, nombre entre otras características. Disponible en: .csv
 4. Archivos python: Encontramos varios archivos:
+
         - Weapon_type: Contiene la clase Weapon_type trantándose de una enumeración. Importado: enum
+        
         - Pokemon: Clase madre, dónde se definen los atributos y métodos, tales como los setters, getters, fight_attack, etc. Importado la clase Weapon_type para tener acceso a las armas.
+        
         - Pokemon_Water, Pokemon_Electricity, Pokemon_Air, Pokemon_Earth: Clases hija de Pokemon, heredan sus atributos y métodos implementando alguna especificación. En algunas de ellas se ha importado: random; además de la clase Pokemon.
+        
         - Main: Archivo principal encargado del código principal. Se encuentra programado el juego al completo. Importado: clase Pokemon junto a sus derivadas; csv, para poder leer los archivos .csv.
 
 
