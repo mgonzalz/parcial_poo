@@ -1,8 +1,10 @@
 import csv
 from pokemon import Pokemon
+from pokemon_air import PokemonAir
+from pokemon_earth import PokemonEarth
+from pokemon_electricity import PokemonElectricity
+from pokemon_water import PokemonWater
 # Source packages.
-
-
 
 def get_data_from_user(name_file):
     """
@@ -33,7 +35,19 @@ def get_data_from_user(name_file):
         for row in reader: # CONVERTIR EN CLASES
             pokemons = Pokemon(int(row[0]), str(row[1]), row[2], int(row[3]), int(row[4]), int(row[5]))
             lista.append(pokemons)
+    for pokemon in lista:
+       if pokemon.get_pokemon_name == 'Pikachu': #ELECTRICITY
+          pokemon = PokemonElectricity(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
+       elif pokemon.get_pokemon_name == 'Pidgey': #AIR
+          pokemon = PokemonAir(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
+       elif pokemon.get_pokemon_name == 'Diglett': #EARTH
+          pokemon = PokemonEarth(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
+       elif pokemon.get_pokemon_name == 'Squirtle': #WATER
+          pokemon = PokemonWater(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
+       else:
+          pass
     return lista
+
 
 
 
@@ -102,14 +116,14 @@ def coach_is_undefeated(list_of_pokemons):
     return False
 
 def coach(list_pokemons, user):
-   for i in range(len(list_pokemons)):
-          choice = input("Player "+  user + " choose your pokemon: ")
-          if choice == list_pokemons[i].get_pokemon_name():
-            pokemon_user = list_pokemons[i]
-            break
-          else:
-            print("You have not chosen a valid pokemon")
-          return pokemon_user
+  choice = input("Player "+  user + " choose your pokemon: ")
+  for i in range(len(list_pokemons)):
+    if choice == list_pokemons[i].get_pokemon_name():
+      pokemon_user = list_pokemons[i]
+      return pokemon_user
+    else:
+      raise ValueError("You have not chosen a valid pokemon")
+
 
 def main():
     """Function main of the module.
@@ -159,7 +173,7 @@ def main():
     pokemon_user_2 = coach(list_pokemons_user2_copy, user2)
 
     # Main loop.
-    while not coach_is_undefeated(list_pokemons_user1_copy) and not coach_is_undefeated(list_pokemons_user2_copy):
+    if not coach_is_undefeated(list_pokemons_user1_copy) and not coach_is_undefeated(list_pokemons_user2_copy):
       pokemon_user_1.attack_rating(pokemon_user_2)
       pokemon_user_2.attack_rating(pokemon_user_1)
       if pokemon_user_1.is_alive == False:
@@ -172,6 +186,7 @@ def main():
         print("The winner is", user2)
       if not coach_is_undefeated(list_pokemons_user2_copy):
         print("The winner is", user1)
+
 
     print("------------------------------------------------------------------")
     print("The Game has end...")
