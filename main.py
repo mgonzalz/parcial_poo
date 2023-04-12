@@ -65,15 +65,19 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
+    pokemons_alive = []
     for i in range(len(list_of_pokemons)):
-      print("Pokemon", i+1, ":", list_of_pokemons[i].get_pokemon_name(), "with", list_of_pokemons[i].get_health_points(), "health points")
+        if list_of_pokemons[i].is_alive():
+            pokemons_alive.append(list_of_pokemons[i])
+    for i in range(len(pokemons_alive)):
+      print("Pokemon", i+1, ":", pokemons_alive[i].get_pokemon_name(), "with", pokemons_alive[i].get_health_points(), "health points")
     pokemon_selected = int(input("Please, select a Pokemon for " + coach_to_ask + ": "))
     print("Put the numer of the Pokemon that you want to select.")
-    if pokemon_selected > len(list_of_pokemons):
+    if pokemon_selected > len(pokemons_alive): #Asegurarse de que el pokemon seleccionado es valido
       raise ValueError("The Pokemon selected is not valid. Please, select a valid Pokemon.")
     else:
-      print("The Pokemon selected is: ", list_of_pokemons[pokemon_selected-1].get_pokemon_name())
-      return list_of_pokemons[pokemon_selected-1]
+      print("The Pokemon selected is: ", pokemons_alive[pokemon_selected-1].get_pokemon_name())
+      return pokemons_alive[pokemon_selected-1]
 
 
 
@@ -101,30 +105,31 @@ def coach_is_undefeated(list_of_pokemons):
        >>> coach_is_undefeated(list_of_pokemons)
     """
     for i in range(len(list_of_pokemons)):
-        if list_of_pokemons[i].is_alive():
+        if list_of_pokemons[i].is_alive() or len(list_of_pokemons) > 0:
             return True
-    return False
+        else:
+            return False
 
 def main():
     """Function main of the module.
 
-    The function main of this module is used to perform the Game.
+        The function main of this module is used to perform the Game.
 
-    Syntax
-    ------
-      [ ] = main()
+        Syntax
+        ------
+          [ ] = main()
 
-    Parameters
-    ----------
-      Null .
+        Parameters
+        ----------
+          Null .
 
-    Returns
-    -------
-      Null .
+        Returns
+        -------
+          Null .
 
-    Example
-    -------
-      >>> main()
+        Example
+        -------
+          >>> main()
     """
 
     print("Welcome to the Game.")
@@ -133,12 +138,10 @@ def main():
     # Get configuration for Game User 1.
     user1 = input("Please, introduce the name of the Game User 1: ")
     list_pokemons_user1 = get_data_from_user("coach_1_pokemons.csv")
-    
+
     # Get configuration for Game User 2.
     user2 = input("Please, introduce the name of the Game User 2: ")
     list_pokemons_user2 = get_data_from_user("coach_2_pokemons.csv")
-
-    users = [user1, user2]
 
     print("------------------------------------------------------------------")
     print("The Game starts...")
@@ -152,8 +155,41 @@ def main():
     pokemon_user1 = get_pokemon_in_a_list_of_pokemons(user1, list_pokemons_user1_copy)
     pokemon_user2 = get_pokemon_in_a_list_of_pokemons(user2, list_pokemons_user2_copy)
 
-    
+
     # Main loop.
+    
+    while coach_is_undefeated(list_pokemons_user1_copy) and coach_is_undefeated(list_pokemons_user2_copy):
+      pokemon_user1.fight_attack(pokemon_user2)
+      pokemon_user2.fight_attack(pokemon_user1)
+      if pokemon_user1.is_alive() == False: #JUGADOR 1
+          print(pokemon_user1.get_pokemon_name(), "is defeated.")
+          list_pokemons_user1_copy.remove(pokemon_user1)
+          del pokemon_user1
+          if len(list_pokemons_user1_copy) > 0:
+              pokemon_user1 = get_pokemon_in_a_list_of_pokemons(user1, list_pokemons_user1_copy)
+          else:
+              break
+      elif pokemon_user2.is_alive() == False: #JUGADOR 2
+          print(pokemon_user2.get_pokemon_name(), "is defeated.")
+          list_pokemons_user2_copy.remove(pokemon_user2)
+          del pokemon_user2
+          if len(list_pokemons_user2_copy) > 0:
+              pokemon_user2 = get_pokemon_in_a_list_of_pokemons(user2, list_pokemons_user2_copy)
+      elif pokemon_user1.is_alive() == True or pokemon_user2.is_alive() == True:
+          continue
+      else:
+          break
+
+    print("------------------------------------------------------------------")
+
+    print("\n")
+    if coach_is_undefeated(list_pokemons_user1_copy) == True:
+        print("The winner is", user1)
+    elif coach_is_undefeated(list_pokemons_user2_copy) == True:
+        print("The winner is", user2)
+
+
+
     print("------------------------------------------------------------------")
     print("The Game has end...")
     print("------------------------------------------------------------------")
@@ -164,12 +200,23 @@ def main():
     print("------------------------------------------------------------------")
     print("Game User 1:")
     for i in range(len(list_pokemons_user1)):
-        print("Pokemon", i+1, ":", list_pokemons_user1[i].get_pokemon_name(), "with", list_pokemons_user1[i].get_health_points(), "health points")
-
+        if list_pokemons_user1[i].is_alive():
+            print("Pokemon", i+1, ":", list_pokemons_user1[i].get_pokemon_name(), "with", list_pokemons_user1[i].get_health_points(), "health points")
+        else:
+            print("Pokemon", i+1, ":", list_pokemons_user1[i].get_pokemon_name(), "with", list_pokemons_user1[i].get_health_points(), "health points is DEFEATED.")
 
     print("Game User 2:")
     for i in range(len(list_pokemons_user2)):
-        print("Pokemon", i+1, ":", list_pokemons_user2[i].get_pokemon_name(), "with", list_pokemons_user2[i].get_health_points(), "health points")
+        if list_pokemons_user2[i].is_alive():
+            print("Pokemon", i+1, ":", list_pokemons_user2[i].get_pokemon_name(), "with", list_pokemons_user2[i].get_health_points(), "health points")
+        else:
+            print("Pokemon", i+1, ":", list_pokemons_user2[i].get_pokemon_name(), "with", list_pokemons_user2[i].get_health_points(), "health points is DEFEATED.")
+    
+
+    print("------------------------------------------------------------------")
+    print("Resume of Pokemons defeated")
+    print("------------------------------------------------------------------")
+    # A continuación se muestra el resumen de los pokemons que han sido derrotados mediante el metodo del definido en la clase Pokemon.
 
 
 # Checking whether this module is executed just itself alone.
