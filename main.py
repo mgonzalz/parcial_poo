@@ -33,19 +33,8 @@ def get_data_from_user(name_file):
     with open(name_file, newline='') as File:
         reader = csv.reader(File)
         for row in reader: # CONVERTIR EN CLASES
-            pokemons = Pokemon(int(row[0]), str(row[1]), row[2], int(row[3]), int(row[4]), int(row[5]))
+            pokemons = Pokemon(int(row[0]), str(row[1]), row[2], int(row[3]), int(row[4]), int(row[5])) #Se les ha establecido todos la clase Pokemon, ya que los pokemons no cumplen las condiciones de las otras clases derivadas.
             lista.append(pokemons)
-    for pokemon in lista:
-       if pokemon.get_pokemon_name == 'Pikachu': #ELECTRICITY
-          pokemon = PokemonElectricity(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
-       elif pokemon.get_pokemon_name == 'Pidgey': #AIR
-          pokemon = PokemonAir(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
-       elif pokemon.get_pokemon_name == 'Diglett': #EARTH
-          pokemon = PokemonEarth(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
-       elif pokemon.get_pokemon_name == 'Squirtle': #WATER
-          pokemon = PokemonWater(pokemon.get_id, pokemon.get_name, pokemon.get_type, pokemon.get_health_points, pokemon.get_attack_points, pokemon.get_defense_points)
-       else:
-          pass
     return lista
 
 
@@ -76,14 +65,15 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
-    primer_pokemon = list_of_pokemons[0]
-    segundo_pokemon = list_of_pokemons[1]
-    tercer_pokemon = list_of_pokemons[2]
-    for i in range(3):
-        print("Pokemon", i+1, ":", list_of_pokemons[i].get_pokemon_name(), "with", list_of_pokemons[i].get_health_points(), "health points")
-    return list_of_pokemons, primer_pokemon, segundo_pokemon, tercer_pokemon
-
-
+    for i in range(len(list_of_pokemons)):
+      print("Pokemon", i+1, ":", list_of_pokemons[i].get_pokemon_name(), "with", list_of_pokemons[i].get_health_points(), "health points")
+    pokemon_selected = int(input("Please, select a Pokemon for " + coach_to_ask + ": "))
+    print("Put the numer of the Pokemon that you want to select.")
+    if pokemon_selected > len(list_of_pokemons):
+      raise ValueError("The Pokemon selected is not valid. Please, select a valid Pokemon.")
+    else:
+      print("The Pokemon selected is: ", list_of_pokemons[pokemon_selected-1].get_pokemon_name())
+      return list_of_pokemons[pokemon_selected-1]
 
 
 
@@ -115,16 +105,6 @@ def coach_is_undefeated(list_of_pokemons):
             return True
     return False
 
-def coach(list_pokemons, user):
-  choice = input("Player "+  user + " choose your pokemon: ")
-  for i in range(len(list_pokemons)):
-    if choice == list_pokemons[i].get_pokemon_name():
-      pokemon_user = list_pokemons[i]
-      return pokemon_user
-    else:
-      raise ValueError("You have not chosen a valid pokemon")
-
-
 def main():
     """Function main of the module.
 
@@ -153,41 +133,27 @@ def main():
     # Get configuration for Game User 1.
     user1 = input("Please, introduce the name of the Game User 1: ")
     list_pokemons_user1 = get_data_from_user("coach_1_pokemons.csv")
-    get_pokemon_in_a_list_of_pokemons(user1, list_pokemons_user1)
-
+    
     # Get configuration for Game User 2.
     user2 = input("Please, introduce the name of the Game User 2: ")
     list_pokemons_user2 = get_data_from_user("coach_2_pokemons.csv")
-    get_pokemon_in_a_list_of_pokemons(user2, list_pokemons_user2)
+
+    users = [user1, user2]
 
     print("------------------------------------------------------------------")
     print("The Game starts...")
     print("------------------------------------------------------------------")
 
     # Get a copy of the list of pokemons:
-    list_pokemons_user1_copy = list_pokemons_user1.copy()
+    list_pokemons_user1_copy = list_pokemons_user1.copy() #PROBAR SINO EL copy.deepcopy(lista) con import copy
     list_pokemons_user2_copy = list_pokemons_user2.copy()
 
     # Choose first pokemons
-    pokemon_user_1 = coach(list_pokemons_user1_copy, user1)
-    pokemon_user_2 = coach(list_pokemons_user2_copy, user2)
+    pokemon_user1 = get_pokemon_in_a_list_of_pokemons(user1, list_pokemons_user1_copy)
+    pokemon_user2 = get_pokemon_in_a_list_of_pokemons(user2, list_pokemons_user2_copy)
 
+    
     # Main loop.
-    if not coach_is_undefeated(list_pokemons_user1_copy) and not coach_is_undefeated(list_pokemons_user2_copy):
-      pokemon_user_1.attack_rating(pokemon_user_2)
-      pokemon_user_2.attack_rating(pokemon_user_1)
-      if pokemon_user_1.is_alive == False:
-        list_pokemons_user1_copy.remove(pokemon_user_1)
-        user1 = coach(list_pokemons_user1_copy, user1)
-      if pokemon_user_2.is_alive ==False:
-        list_pokemons_user2_copy.remove(pokemon_user_2)
-        user2 = coach(list_pokemons_user2_copy, user2)
-      if not coach_is_undefeated(list_pokemons_user1_copy):
-        print("The winner is", user2)
-      if not coach_is_undefeated(list_pokemons_user2_copy):
-        print("The winner is", user1)
-
-
     print("------------------------------------------------------------------")
     print("The Game has end...")
     print("------------------------------------------------------------------")
