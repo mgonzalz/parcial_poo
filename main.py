@@ -71,9 +71,13 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
             pokemons_alive.append(list_of_pokemons[i])
     for i in range(len(pokemons_alive)):
       print("Pokemon", i+1, ":", pokemons_alive[i].get_pokemon_name(), "with", pokemons_alive[i].get_health_points(), "health points")
-    pokemon_selected = int(input("Please, select a Pokemon for " + coach_to_ask + ": "))
+    pokemon_selected = input("Please, select a Pokemon for " + coach_to_ask + ": ")
     print("Put the numer of the Pokemon that you want to select.")
-    if pokemon_selected > len(pokemons_alive): #Asegurarse de que el pokemon seleccionado es valido
+    try:
+      pokemon_selected = int(pokemon_selected)
+      if pokemon_selected <= 0 or pokemon_selected > len(pokemons_alive): #Asegurarse de que el pokemon seleccionado es valid
+        raise ValueError("The Pokemon selected is not valid. Please, select a valid Pokemon.")
+    except ValueError: #EXCEPCIONES
       raise ValueError("The Pokemon selected is not valid. Please, select a valid Pokemon.")
     else:
       print("The Pokemon selected is: ", pokemons_alive[pokemon_selected-1].get_pokemon_name())
@@ -137,11 +141,17 @@ def main():
 
     # Get configuration for Game User 1.
     user1 = input("Please, introduce the name of the Game User 1: ")
-    list_pokemons_user1 = get_data_from_user("DATA/coach_1_pokemons.csv")
+    if isinstance(user1, str) is False or len(user1) == 0: #CADENA DE TEXTTO COMPROBACION
+      raise ValueError("The name of the Game User 1 is not valid. Please, introduce a valid name.")
+    else:
+      list_pokemons_user1 = get_data_from_user("DATA/coach_1_pokemons.csv")
 
     # Get configuration for Game User 2.
     user2 = input("Please, introduce the name of the Game User 2: ")
-    list_pokemons_user2 = get_data_from_user("DATA/coach_2_pokemons.csv")
+    if isinstance(user2, str) is False or len(user2) == 0:
+      raise ValueError("The name of the Game User 2 is not valid. Please, introduce a valid name.")
+    else:
+      list_pokemons_user2 = get_data_from_user("DATA/coach_2_pokemons.csv")
 
     print("------------------------------------------------------------------")
     print("The Game starts...")
