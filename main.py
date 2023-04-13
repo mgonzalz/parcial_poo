@@ -142,14 +142,14 @@ def main():
     # Get configuration for Game User 1.
     user1 = input("Please, introduce the name of the Game User 1: ")
     if isinstance(user1, str) is False or len(user1) == 0: #CADENA DE TEXTTO COMPROBACION
-      raise ValueError("The name of the Game User 1 is not valid. Please, introduce a valid name.")
+      print("The name of the Game User 1 is not valid. Please, introduce a valid name.")
     else:
       list_pokemons_user1 = get_data_from_user("DATA/coach_1_pokemons.csv")
 
     # Get configuration for Game User 2.
     user2 = input("Please, introduce the name of the Game User 2: ")
     if isinstance(user2, str) is False or len(user2) == 0:
-      raise ValueError("The name of the Game User 2 is not valid. Please, introduce a valid name.")
+      print("The name of the Game User 2 is not valid. Please, introduce a valid name.")
     else:
       list_pokemons_user2 = get_data_from_user("DATA/coach_2_pokemons.csv")
 
