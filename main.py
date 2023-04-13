@@ -75,9 +75,9 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     print("Put the numer of the Pokemon that you want to select.")
     try:
       pokemon_selected = int(pokemon_selected)
-      if pokemon_selected <= 0 or pokemon_selected > len(pokemons_alive): #Asegurarse de que el pokemon seleccionado es valid
+      if pokemon_selected <= 0 or pokemon_selected > len(pokemons_alive): #NUM DENTRO DE LA LONG DE LA LISTA
         raise ValueError("The Pokemon selected is not valid. Please, select a valid Pokemon.")
-    except ValueError: #EXCEPCIONES
+    except: # QUE ES UN NUM
       raise ValueError("The Pokemon selected is not valid. Please, select a valid Pokemon.")
     else:
       print("The Pokemon selected is: ", pokemons_alive[pokemon_selected-1].get_pokemon_name())
