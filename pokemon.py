@@ -99,6 +99,7 @@ class Pokemon():
     # METODO FIGHT_DEFENSE
     def fight_defense(self, damage):
         self.health_points = self.health_points - damage + self.defense_rating
+        self. health_points = max(self.health_points, 0)
         if self.health_points <= 0:
             return False
         else:
@@ -113,7 +114,7 @@ class Pokemon():
         else:
             return True
     def __del__(self):
-        print("Pokemon " + self.pokemon_name + " has been destroyed.")
+        return "Pokemon " + self.pokemon_name + " has been destroyed."
 
     # METODO STR
     def __str__(self):  #Pokemon ID 2 with name Charmander has as weapon HEADBUTT and health 100

@@ -182,7 +182,6 @@ def main():
 
     print("------------------------------------------------------------------")
 
-    print("\n")
     if coach_is_undefeated(list_pokemons_user1_copy) == True:
         print("The winner is", user1)
     elif coach_is_undefeated(list_pokemons_user2_copy) == True:
@@ -211,12 +210,6 @@ def main():
             print("Pokemon", i+1, ":", list_pokemons_user2[i].get_pokemon_name(), "with", list_pokemons_user2[i].get_health_points(), "health points")
         else:
             print("Pokemon", i+1, ":", list_pokemons_user2[i].get_pokemon_name(), "with", list_pokemons_user2[i].get_health_points(), "health points is DEFEATED.")
-    
-
-    print("------------------------------------------------------------------")
-    print("Resume of Pokemons defeated")
-    print("------------------------------------------------------------------")
-    # A continuación se muestra el resumen de los pokemons que han sido derrotados mediante el metodo del definido en la clase Pokemon.
 
 
 # Checking whether this module is executed just itself alone.
